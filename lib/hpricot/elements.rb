@@ -134,13 +134,13 @@ module Hpricot
     # Add to the end of the contents inside each element in this list.
     # Pass in an HTML +str+, which is turned into Hpricot elements.
     def append(str = nil, &blk)
-      each { |x| x.html(x.children + x.make(str, &blk)) }
+      each { |x| x.html((x.children || Hpricot::Elements[]) + x.make(str, &blk)) }
     end
 
     # Add to the start of the contents inside each element in this list.
     # Pass in an HTML +str+, which is turned into Hpricot elements.
     def prepend(str = nil, &blk)
-      each { |x| x.html(x.make(str, &blk) + x.children) }
+      each { |x| x.html(x.make(str, &blk) + (x.children || Hpricot::Elements[])) }
     end
 
     # Add some HTML just previous to each element in this list.
